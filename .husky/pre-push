@@ -1,0 +1,3 @@
+yarn style:check
+yarn lint:quiet
+yarn test:unit

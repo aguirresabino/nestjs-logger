@@ -1,0 +1,7 @@
+dist
+node_modules
+.editorconfig
+LICENSE
+README.md
+yarn.lock
+test/coverage
