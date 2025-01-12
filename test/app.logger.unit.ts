@@ -281,6 +281,31 @@ describe('AppLogger', () => {
       // Assert
       expect(options).toStrictEqual(expected);
     });
+
+    it('should return pino logger options with level info and enabled when all params is undefined', () => {
+      // Arrange
+      const sut: AppLogger = new AppLogger(undefined, undefined, undefined);
+      const expected: pino.LoggerOptions = {
+        enabled: true,
+        level: 'info',
+        redact: ['req.authorization'],
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            levelFirst: true,
+            singleLine: true,
+            messageFormat:
+              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
+          },
+        },
+      };
+
+      // Act
+      const options: pino.LoggerOptions = sut['configureCustomOptions']();
+
+      // Assert
+      expect(options).toStrictEqual(expected);
+    });
   });
 });
 
