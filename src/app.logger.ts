@@ -5,7 +5,7 @@ import { Level, pino } from 'pino';
 import { Inject, Injectable, LoggerService, Optional } from '@nestjs/common';
 
 import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
+import { LoggerConfigOptions, LoggerLocalAsyncStorage } from '@src/interfaces';
 import { PinoLoggerFactory } from '@src/pino/pino-logger.factory';
 
 /**
@@ -19,12 +19,27 @@ import { PinoLoggerFactory } from '@src/pino/pino-logger.factory';
 export class AppLogger implements LoggerService {
   private readonly contextName: string = 'context';
   private readonly logger: pino.Logger;
+  private DEFAULT_LOGGER_OPTIONS: pino.LoggerOptions = {
+    enabled: true,
+    level: 'info',
+    redact: ['req.authorization'],
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        levelFirst: true,
+        singleLine: true,
+        messageFormat:
+          '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
+      },
+    },
+  };
 
   constructor(
     @Optional()
     @Inject(LOGGER_LOCAL_ASYNC_STORAGE)
     private readonly asyncStorage?: AsyncLocalStorage<LoggerLocalAsyncStorage>,
-    @Optional() private readonly factory?: PinoLoggerFactory
+    @Optional() private readonly factory?: PinoLoggerFactory,
+    @Optional() private readonly options?: LoggerConfigOptions
   ) {
     this.logger = this.createLogger();
   }
@@ -33,24 +48,16 @@ export class AppLogger implements LoggerService {
     if (this.factory) {
       return this.factory.create();
     }
-    const defaultPrettyOptions: pino.LoggerOptions =
-      this.configurePrettyOptions();
-    return pino(defaultPrettyOptions);
+    if (this.options) {
+      return pino(this.configureCustomOptions());
+    }
+    return pino(this.DEFAULT_LOGGER_OPTIONS);
   }
 
-  private configurePrettyOptions(): pino.LoggerOptions {
-    const nodeEnv: string =
-      !process.env.NODE_ENV ||
-      process.env.NODE_ENV === 'null' ||
-      process.env.NODE_ENV === 'undefined'
-        ? 'production'
-        : process.env.NODE_ENV;
-    const enabled: boolean = ['development', 'staging', 'production'].includes(
-      nodeEnv
-    );
+  private configureCustomOptions(): pino.LoggerOptions {
     return {
-      enabled,
-      level: 'info',
+      enabled: this.options?.enabled ?? true,
+      level: this.options?.level ?? 'info',
       redact: ['req.authorization'],
       transport: {
         target: 'pino-pretty',

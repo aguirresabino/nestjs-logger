@@ -2,7 +2,7 @@ import { AsyncLocalStorage } from 'async_hooks';
 import pino from 'pino';
 
 import { AppLogger, AppLoggerFactory } from '@src/app.logger';
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
+import { LoggerConfigOptions, LoggerLocalAsyncStorage } from '@src/interfaces';
 import { PinoLoggerFactory } from '@src/pino';
 
 describe('AppLogger', () => {
@@ -163,11 +163,14 @@ describe('AppLogger', () => {
     });
   });
 
-  describe('configurePrettyOptions', () => {
+  describe('configureCustomOptions', () => {
     it('should return pino logger options with level info and enabled', () => {
       // Arrange
-      process.env.NODE_ENV = 'production';
-      const { sut } = makeSut();
+      const optionsLogger: LoggerConfigOptions = {
+        enabled: true,
+        level: 'info',
+      };
+      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
 
       const expected: pino.LoggerOptions = {
         enabled: true,
@@ -185,7 +188,7 @@ describe('AppLogger', () => {
       };
 
       // Act
-      const options: pino.LoggerOptions = sut['configurePrettyOptions']();
+      const options: pino.LoggerOptions = sut['configureCustomOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);
@@ -193,8 +196,11 @@ describe('AppLogger', () => {
 
     it('should return pino logger options with level info and not enabled', () => {
       // Arrange
-      process.env.NODE_ENV = 'test';
-      const { sut } = makeSut();
+      const optionsLogger: LoggerConfigOptions = {
+        enabled: false,
+        level: 'info',
+      };
+      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
 
       const expected: pino.LoggerOptions = {
         enabled: false,
@@ -212,19 +218,22 @@ describe('AppLogger', () => {
       };
 
       // Act
-      const options: pino.LoggerOptions = sut['configurePrettyOptions']();
+      const options: pino.LoggerOptions = sut['configureCustomOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);
     });
 
-    it('should return pino logger options enabled when the NODE_ENV is undefined', () => {
+    it('should return pino logger options with level warn and enabled', () => {
       // Arrange
-      process.env.NODE_ENV = undefined;
-      const { sut } = makeSut();
+      const optionsLogger: LoggerConfigOptions = {
+        enabled: true,
+        level: 'warn',
+      };
+      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
       const expected: pino.LoggerOptions = {
         enabled: true,
-        level: 'info',
+        level: 'warn',
         redact: ['req.authorization'],
         transport: {
           target: 'pino-pretty',
@@ -238,19 +247,22 @@ describe('AppLogger', () => {
       };
 
       // Act
-      const options: pino.LoggerOptions = sut['configurePrettyOptions']();
+      const options: pino.LoggerOptions = sut['configureCustomOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);
     });
 
-    it('should return pino logger options enabled when the NODE_ENV is null', () => {
+    it('should return pino logger options with level error and enabled', () => {
       // Arrange
-      process.env.NODE_ENV = null as never;
-      const { sut } = makeSut();
+      const optionsLogger: LoggerConfigOptions = {
+        enabled: true,
+        level: 'error',
+      };
+      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
       const expected: pino.LoggerOptions = {
         enabled: true,
-        level: 'info',
+        level: 'error',
         redact: ['req.authorization'],
         transport: {
           target: 'pino-pretty',
@@ -264,7 +276,7 @@ describe('AppLogger', () => {
       };
 
       // Act
-      const options: pino.LoggerOptions = sut['configurePrettyOptions']();
+      const options: pino.LoggerOptions = sut['configureCustomOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);
