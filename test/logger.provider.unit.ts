@@ -1,9 +1,15 @@
 import { Inject } from '@nestjs/common';
+
 import { InjectLogger, loggerTokens } from '@src/logger.provider';
 
-jest.mock('@nestjs/common', () => ({
-  Inject: jest.fn(),
-}));
+jest.mock<typeof import('@nestjs/common')>('@nestjs/common', () => {
+  const actual: typeof import('@nestjs/common') =
+    jest.requireActual('@nestjs/common');
+  return {
+    ...actual,
+    Inject: jest.fn(),
+  };
+});
 
 describe('InjectLogger', () => {
   it('should add the token to loggerTokens', () => {
@@ -21,9 +27,10 @@ describe('InjectLogger', () => {
   it('should return the result of Inject', () => {
     // Arrange
     const context = 'TestContext';
-    const expected = 'InjectResult';
+    const expected: PropertyDecorator & ParameterDecorator =
+      'InjectResult' as unknown as PropertyDecorator & ParameterDecorator;
 
-    (Inject as jest.Mock).mockReturnValue(expected);
+    jest.mocked(Inject).mockReturnValue(expected);
 
     // Act
     const result = InjectLogger(context);

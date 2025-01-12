@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import {
-  DEFAULT_APP_LOGGER,
-  LOGGER_SUFFIX,
-} from '@src/constants';
+import { DEFAULT_APP_LOGGER, LOGGER_SUFFIX } from '@src/constants';
 
 export function getTokenOfLoggerThatOverrideNestLogger(): symbol {
   return DEFAULT_APP_LOGGER;

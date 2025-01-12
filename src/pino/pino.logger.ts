@@ -1,10 +1,7 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import pino, { Level } from 'pino';
 
-import {
-  Logger,
-  LoggerLocalAsyncStorage,
-} from '@src/interfaces';
+import { Logger, LoggerLocalAsyncStorage } from '@src/interfaces';
 
 export class PinoLogger implements Logger {
   constructor(

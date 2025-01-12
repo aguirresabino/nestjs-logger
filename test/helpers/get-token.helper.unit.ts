@@ -1,7 +1,4 @@
-import {
-  DEFAULT_APP_LOGGER,
-  LOGGER_SUFFIX,
-} from '@src/constants';
+import { DEFAULT_APP_LOGGER, LOGGER_SUFFIX } from '@src/constants';
 import {
   getLoggerToken,
   getTokenOfLoggerThatOverrideNestLogger,

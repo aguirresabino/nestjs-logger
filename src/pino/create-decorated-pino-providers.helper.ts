@@ -5,10 +5,7 @@ import { Provider } from '@nestjs/common';
 
 import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
 import { getContextFromLoggerToken } from '@src/helpers/get-context.helper';
-import {
-  Logger,
-  LoggerLocalAsyncStorage,
-} from '@src/interfaces';
+import { Logger, LoggerLocalAsyncStorage } from '@src/interfaces';
 import { PinoLoggerFactory } from '@src/pino/pino-logger.factory';
 import { PinoLogger } from '@src/pino/pino.logger';
 

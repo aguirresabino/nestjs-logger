@@ -27,6 +27,7 @@ import {
 } from '@src/pino';
 
 @Module({})
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class LoggerModule {
   static forRootAsync(
     options: ConfigurableModuleAsyncOptions<LoggerConfigOptions>
