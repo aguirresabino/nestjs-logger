@@ -11,7 +11,6 @@ describe('PinoLoggerFactory', () => {
       const loggerOptions: LoggerConfigOptions = {
         level: 'info',
         enabled: true,
-        nodeEnv: 'test',
       };
 
       const expected: pino.LoggerOptions = {
@@ -42,74 +41,11 @@ describe('PinoLoggerFactory', () => {
       const loggerOptions: LoggerConfigOptions = {
         level: 'error',
         enabled: false,
-        nodeEnv: 'test',
       };
 
       const expected: pino.LoggerOptions = {
         enabled: false,
         level: 'error',
-        redact: ['req.authorization', 'password'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions =
-        PinoLoggerFactory['configurePrettyOptions'](loggerOptions);
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options not enabled when the enabled option is undefined', () => {
-      // Arrange
-      const loggerOptions: LoggerConfigOptions = {
-        level: 'info',
-        enabled: undefined,
-        nodeEnv: 'test',
-      };
-
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'info',
-        redact: ['req.authorization', 'password'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions =
-        PinoLoggerFactory['configurePrettyOptions'](loggerOptions);
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options not enabled when the enabled option is null', () => {
-      // Arrange
-      const loggerOptions: LoggerConfigOptions = {
-        level: 'info',
-        enabled: null as unknown as boolean,
-        nodeEnv: 'test',
-      };
-
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'info',
         redact: ['req.authorization', 'password'],
         transport: {
           target: 'pino-pretty',
@@ -137,7 +73,6 @@ describe('PinoLoggerFactory', () => {
       const loggerOptions: LoggerConfigOptions = {
         level: 'info',
         enabled: true,
-        nodeEnv: 'test',
       };
 
       const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
@@ -157,7 +92,6 @@ describe('PinoLoggerFactory', () => {
       const loggerOptions: LoggerConfigOptions = {
         level: 'error',
         enabled: true,
-        nodeEnv: 'test',
       };
       const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
 
