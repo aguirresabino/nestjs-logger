@@ -1,4 +1,4 @@
 export interface LoggerConfigOptions {
-  enabled?: boolean;
+  enabled: boolean;
   level: string;
 }

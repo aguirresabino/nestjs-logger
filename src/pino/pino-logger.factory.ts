@@ -19,7 +19,7 @@ export class PinoLoggerFactory {
     options: LoggerConfigOptions
   ): pino.LoggerOptions {
     return {
-      enabled: this.enable(options),
+      enabled: options.enabled,
       level: options.level,
       redact: ['req.authorization', 'password'],
       transport: {
@@ -32,10 +32,6 @@ export class PinoLoggerFactory {
         },
       },
     };
-  }
-
-  private static enable(options: LoggerConfigOptions): boolean {
-    return options.enabled ?? true;
   }
 
   create(context?: string): pino.Logger {
