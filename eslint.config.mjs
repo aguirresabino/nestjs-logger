@@ -26,6 +26,7 @@ export default tsEslint.config(
       '.gitignore',
       '.editorconfig',
       'commitlint.config.js',
+      'release.config.mjs',
       'nest-cli.json',
       'package.json',
       'tsconfig*',
