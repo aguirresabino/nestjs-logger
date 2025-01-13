@@ -66,6 +66,20 @@ async function bootstrap() {
 void bootstrap();
 ```
 
+Now, you can inject a logger into a service or other injectable class using the `@InjectLogger` decorator:
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectLogger, Logger } from '@aguirresabino/nestjs-logger';
+
+@Injectable()
+export class MyService {
+  constructor(
+    @InjectLogger(MyService.name) private readonly logger: Logger,
+  ){}
+}
+```
+
 ### Using the Logger Outside of NestJS
 
 The `AppLogger` class can also be used outside of the NestJS dependency injection context. This can be useful for logging in other parts of your code that do not use NestJS:
