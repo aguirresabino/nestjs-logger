@@ -1,14 +1,26 @@
 {
-  "name": "nestjs-logger",
+  "name": "@aguirresabino/nestjs-logger",
   "version": "0.0.1-development",
   "description": "Logger for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Aguirre Sabino <aguirresabino187@gmail.com> (https://github.com/aguirresabino)",
   "license": "MIT",
+  "keywords": [
+    "nestjs",
+    "logger",
+    "pino"
+  ],
+  "files": [
+    "dist"
+  ],
   "engineStrict": true,
   "engines": {
     "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aguirresabino/nestjs-logger.git"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
