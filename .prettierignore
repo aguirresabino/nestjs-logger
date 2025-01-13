@@ -5,3 +5,4 @@ LICENSE
 README.md
 yarn.lock
 test/coverage
+docs/*.md
