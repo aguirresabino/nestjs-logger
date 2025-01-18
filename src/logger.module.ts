@@ -29,6 +29,37 @@ import {
 @Module({})
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class LoggerModule {
+  static forRoot(options: LoggerConfigOptions): DynamicModule {
+    const decoratedPinoLoggerProviders: Provider<Logger>[] =
+      createDecoratedPinoLoggerProviders(loggerTokens);
+
+    return {
+      module: LoggerModule,
+      global: true,
+      providers: [
+        {
+          provide: LOGGER_OPTIONS,
+          useValue: options,
+        },
+        {
+          provide: LOGGER_LOCAL_ASYNC_STORAGE,
+          useValue: new AsyncLocalStorage<LoggerLocalAsyncStorage>(),
+        },
+        {
+          provide: APP_INTERCEPTOR,
+          useClass: LoggerLocalAsyncStorageInterceptor,
+        },
+        PinoLoggerFactory,
+        {
+          provide: DEFAULT_APP_LOGGER,
+          useValue: AppLoggerFactory.get(),
+        },
+        ...decoratedPinoLoggerProviders,
+      ],
+      exports: [DEFAULT_APP_LOGGER, ...decoratedPinoLoggerProviders],
+    };
+  }
+
   static forRootAsync(
     options: ConfigurableModuleAsyncOptions<LoggerConfigOptions>
   ): DynamicModule {
