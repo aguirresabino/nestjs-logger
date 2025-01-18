@@ -6,6 +6,14 @@
 * allow config logger module ([44c0072](https://github.com/aguirresabino/nestjs-logger/commit/44c0072420ad056c6835dbcb11a37604e2bdf78f))
 * allow config module using forRoot ([12b9fea](https://github.com/aguirresabino/nestjs-logger/commit/12b9fea82d3d194afafa689197e388f04df6b4d5))
 
+# [1.1.0](https://github.com/aguirresabino/nestjs-logger/compare/v1.0.0...v1.1.0) (2025-01-18)
+
+
+### Features
+
+* allow config logger module ([44c0072](https://github.com/aguirresabino/nestjs-logger/commit/44c0072420ad056c6835dbcb11a37604e2bdf78f))
+* allow config module using forRoot ([12b9fea](https://github.com/aguirresabino/nestjs-logger/commit/12b9fea82d3d194afafa689197e388f04df6b4d5))
+
 # 1.0.0 (2025-01-13)
 
 
