@@ -26,7 +26,26 @@ yarn add @aguirresabino/nestjs-logger
 
 ### Basic Usage
 
-To use the logger in your NestJS application, you need to import and configure the `LoggerModule`:
+To use the logger in your NestJS application, you can import and configure the `LoggerModule` using either `forRoot` or `forRootAsync`:
+
+#### Using `forRoot`
+
+```ts
+import { Module } from '@nestjs/common';
+import { LoggerModule } from '@aguirresabino/nestjs-logger';
+
+@Module({
+  imports: [
+    LoggerModule.forRoot({
+      enabled: true,
+      level: 'info',
+    }),
+  ],
+})
+export class AppModule {}
+```
+
+#### Using `forRootAsync`
 
 ```ts
 import { Module } from '@nestjs/common';
