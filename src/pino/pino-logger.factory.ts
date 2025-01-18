@@ -2,8 +2,8 @@ import pino from 'pino';
 
 import { Inject, Injectable } from '@nestjs/common';
 
-import { LOGGER_OPTIONS } from '@src/constants';
-import { LoggerConfigOptions } from '@src/interfaces';
+import { LOGGER_OPTIONS } from '../constants';
+import { LoggerConfigOptions } from '../interfaces';
 
 @Injectable()
 export class PinoLoggerFactory {

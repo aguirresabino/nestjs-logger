@@ -3,8 +3,8 @@ import { AsyncLocalStorage } from 'async_hooks';
 
 import { CallHandler, ExecutionContext } from '@nestjs/common';
 
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
-import { LoggerLocalAsyncStorageInterceptor } from '@src/logger-local-async-storage.interceptor';
+import { LoggerLocalAsyncStorage } from '../src/interfaces';
+import { LoggerLocalAsyncStorageInterceptor } from '../src/logger-local-async-storage.interceptor';
 
 describe('LoggerLocalAsyncStorageInterceptor', () => {
   it('should enter a new async storage when no store exists', async () => {

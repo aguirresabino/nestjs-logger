@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 
-import { getLoggerToken } from '@src/helpers';
+import { getLoggerToken } from './helpers';
 
 export const loggerTokens: Set<string> = new Set<string>();
 

@@ -1,9 +1,12 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import pino from 'pino';
 
-import { AppLogger, AppLoggerFactory } from '@src/app.logger';
-import { LoggerConfigOptions, LoggerLocalAsyncStorage } from '@src/interfaces';
-import { PinoLoggerFactory } from '@src/pino';
+import { AppLogger, AppLoggerFactory } from '../src/app.logger';
+import {
+  LoggerConfigOptions,
+  LoggerLocalAsyncStorage,
+} from '../src/interfaces';
+import { PinoLoggerFactory } from '../src/pino';
 
 describe('AppLogger', () => {
   describe('error', () => {

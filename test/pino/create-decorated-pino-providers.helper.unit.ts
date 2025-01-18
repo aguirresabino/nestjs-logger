@@ -4,12 +4,12 @@ import { Logger, pino } from 'pino';
 
 import { FactoryProvider } from '@nestjs/common';
 
-import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
+import { LOGGER_LOCAL_ASYNC_STORAGE } from '../../src/constants';
+import { LoggerLocalAsyncStorage } from '../../src/interfaces';
 import {
   createDecoratedPinoLoggerProviders,
   PinoLoggerFactory,
-} from '@src/pino';
+} from '../../src/pino';
 
 describe('createDecoratedPinoLoggerProviders', () => {
   it('should create decorated pino logger providers with correct dependencies', () => {

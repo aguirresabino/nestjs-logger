@@ -8,11 +8,6 @@
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "baseUrl": "./",
-    "paths": {
-      "@src/*": ["./src/*"],
-      "@test/*": ["./test/*"]
-    },
-    "rootDirs": ["./src", "./test"],
     "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "dist",
@@ -34,6 +29,6 @@
     "noImplicitOverride": true,
     "skipLibCheck": true
   },
-  "include": ["./src/**/*.ts", "./test/**/*.ts"],
+  "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules", "dist"]
 }

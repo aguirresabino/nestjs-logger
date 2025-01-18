@@ -3,11 +3,11 @@ import pino from 'pino';
 
 import { Provider } from '@nestjs/common';
 
-import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
-import { getContextFromLoggerToken } from '@src/helpers/get-context.helper';
-import { Logger, LoggerLocalAsyncStorage } from '@src/interfaces';
-import { PinoLoggerFactory } from '@src/pino/pino-logger.factory';
-import { PinoLogger } from '@src/pino/pino.logger';
+import { LOGGER_LOCAL_ASYNC_STORAGE } from '../constants';
+import { getContextFromLoggerToken } from '../helpers/get-context.helper';
+import { Logger, LoggerLocalAsyncStorage } from '../interfaces';
+import { PinoLoggerFactory } from './pino-logger.factory';
+import { PinoLogger } from './pino.logger';
 
 export function createDecoratedPinoLoggerProviders(
   loggerTokens: Set<string>

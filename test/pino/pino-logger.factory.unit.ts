@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { pino } from 'pino';
 
-import { LoggerConfigOptions } from '@src/interfaces';
-import { PinoLoggerFactory } from '@src/pino';
+import { LoggerConfigOptions } from '../../src/interfaces';
+import { PinoLoggerFactory } from '../../src/pino';
 
 describe('PinoLoggerFactory', () => {
   describe('configurePrettyOptions', () => {

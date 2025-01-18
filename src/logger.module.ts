@@ -9,24 +9,21 @@ import {
 } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
-import { AppLoggerFactory } from '@src/app.logger';
+import { AppLoggerFactory } from './app.logger';
 import {
   DEFAULT_APP_LOGGER,
   LOGGER_LOCAL_ASYNC_STORAGE,
   LOGGER_OPTIONS,
-} from '@src/constants';
+} from './constants';
 import {
   Logger,
   LoggerConfigFactory,
   LoggerConfigOptions,
   LoggerLocalAsyncStorage,
-} from '@src/interfaces';
-import { LoggerLocalAsyncStorageInterceptor } from '@src/logger-local-async-storage.interceptor';
-import { loggerTokens } from '@src/logger.provider';
-import {
-  createDecoratedPinoLoggerProviders,
-  PinoLoggerFactory,
-} from '@src/pino';
+} from './interfaces';
+import { LoggerLocalAsyncStorageInterceptor } from './logger-local-async-storage.interceptor';
+import { loggerTokens } from './logger.provider';
+import { createDecoratedPinoLoggerProviders, PinoLoggerFactory } from './pino';
 
 @Module({})
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class

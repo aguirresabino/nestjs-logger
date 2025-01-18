@@ -1,4 +1,4 @@
-import { getContextFromLoggerToken } from '@src/helpers/get-context.helper';
+import { getContextFromLoggerToken } from '../../src/helpers/get-context.helper';
 
 describe('getContextFromLoggerToken', () => {
   it('should extract the context from the token correctly', () => {
