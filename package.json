@@ -70,6 +70,7 @@
     "lint:check": "eslint . --cache",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
+    "example": "rimraf dist && tsc -p tsconfig.json && node dist/examples/example.js",
     "release": "semantic-release",
     "test:unit": "jest --ci --passWithNoTests --config=jest.config.unit.js",
     "test:integration": "jest --runInBand --ci --passWithNoTests --config=jest.config.integration.js",

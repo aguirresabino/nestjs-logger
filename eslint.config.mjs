@@ -55,7 +55,7 @@ export default tsEslint.config(
     },
   },
   {
-    files: ['src/**', 'test/**'],
+    files: ['src/**', 'test/**', 'examples/**'],
     rules: {
       'no-console': 'error',
       '@typescript-eslint/restrict-template-expressions': 'warn',
