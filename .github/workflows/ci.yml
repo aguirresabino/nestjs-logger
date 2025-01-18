@@ -23,6 +23,7 @@ jobs:
         run: yarn install
 
       - name: Run commitlint
+        if: github.actor != 'dependabot[bot]'
         run: yarn commitlint --from=origin/main --to=HEAD
 
       - name: Run lint
