@@ -1,6 +1,6 @@
 {
   "name": "@aguirresabino/nestjs-logger",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Logger for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -71,7 +71,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "example": "rimraf dist && tsc -p tsconfig.json && node dist/examples/example.js",
-    "release": "semantic-release",
+    "release": "CI=true GIT_AUTHOR_NAME='Aguirre Sabino' GIT_COMMITTER_NAME='Aguirre Sabino' GIT_AUTHOR_EMAIL='aguirresabino187@gmail.com' GIT_COMMITTER_EMAIL='aguirresabino187@gmail.com' semantic-release",
     "test:unit": "jest --ci --passWithNoTests --config=jest.config.unit.js",
     "test:integration": "jest --runInBand --ci --passWithNoTests --config=jest.config.integration.js",
     "test:coverage": "jest --runInBand --ci --config=jest.config.coverage.js",
