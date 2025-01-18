@@ -1,8 +1,8 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import { pino } from 'pino';
 
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
-import { PinoLogger } from '@src/pino';
+import { LoggerLocalAsyncStorage } from '../../src/interfaces';
+import { PinoLogger } from '../../src/pino';
 
 describe('PinoLogger', () => {
   describe('fatal', () => {

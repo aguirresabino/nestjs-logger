@@ -10,8 +10,8 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 
-import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
-import { LoggerLocalAsyncStorage } from '@src/interfaces';
+import { LOGGER_LOCAL_ASYNC_STORAGE } from './constants';
+import { LoggerLocalAsyncStorage } from './interfaces';
 
 @Injectable()
 export class LoggerLocalAsyncStorageInterceptor implements NestInterceptor {

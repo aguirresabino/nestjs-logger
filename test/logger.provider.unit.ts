@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 
-import { InjectLogger, loggerTokens } from '@src/logger.provider';
+import { InjectLogger, loggerTokens } from '../src/logger.provider';
 
 jest.mock<typeof import('@nestjs/common')>('@nestjs/common', () => {
   const actual: typeof import('@nestjs/common') =

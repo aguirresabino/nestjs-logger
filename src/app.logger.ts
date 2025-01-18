@@ -4,9 +4,9 @@ import { Level, pino } from 'pino';
 
 import { Inject, Injectable, LoggerService, Optional } from '@nestjs/common';
 
-import { LOGGER_LOCAL_ASYNC_STORAGE } from '@src/constants';
-import { LoggerConfigOptions, LoggerLocalAsyncStorage } from '@src/interfaces';
-import { PinoLoggerFactory } from '@src/pino/pino-logger.factory';
+import { LOGGER_LOCAL_ASYNC_STORAGE } from './constants';
+import { LoggerConfigOptions, LoggerLocalAsyncStorage } from './interfaces';
+import { PinoLoggerFactory } from './pino/pino-logger.factory';
 
 /**
  * This class was copied and improved from the nestjs-pino package,
