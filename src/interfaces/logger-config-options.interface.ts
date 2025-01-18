@@ -4,5 +4,5 @@ export interface LoggerConfigOptions {
 }
 
 export interface LoggerConfigFactory {
-  createLoggerOptions(): LoggerConfigOptions | Promise<LoggerConfigOptions>;
+  create(): LoggerConfigOptions | Promise<LoggerConfigOptions>;
 }
