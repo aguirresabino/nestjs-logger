@@ -1,10 +1,3 @@
-## [1.1.1](https://github.com/aguirresabino/nestjs-logger/compare/v1.1.0...v1.1.1) (2025-01-18)
-
-
-### Bug Fixes
-
-* set variables to semantic-release ([cf455b8](https://github.com/aguirresabino/nestjs-logger/commit/cf455b8dfaff0b12afda198b47436cbad4c7ec70))
-
 # [1.1.0](https://github.com/aguirresabino/nestjs-logger/compare/v1.0.0...v1.1.0) (2025-01-18)
 
 
