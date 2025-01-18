@@ -5,6 +5,7 @@ import {
   DynamicModule,
   Module,
   Provider,
+  Type,
 } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
@@ -16,6 +17,7 @@ import {
 } from '@src/constants';
 import {
   Logger,
+  LoggerConfigFactory,
   LoggerConfigOptions,
   LoggerLocalAsyncStorage,
 } from '@src/interfaces';
@@ -66,16 +68,14 @@ export class LoggerModule {
     const decoratedPinoLoggerProviders: Provider<Logger>[] =
       createDecoratedPinoLoggerProviders(loggerTokens);
 
+    const asyncProviders = this.createAsyncProviders(options);
+
     return {
       module: LoggerModule,
       imports: options.imports,
       global: true,
       providers: [
-        {
-          provide: LOGGER_OPTIONS,
-          useFactory: options.useFactory as never,
-          inject: options.inject,
-        },
+        ...asyncProviders,
         {
           provide: LOGGER_LOCAL_ASYNC_STORAGE,
           useValue: new AsyncLocalStorage<LoggerLocalAsyncStorage>(),
@@ -93,5 +93,37 @@ export class LoggerModule {
       ],
       exports: [DEFAULT_APP_LOGGER, ...decoratedPinoLoggerProviders],
     };
+  }
+
+  private static createAsyncProviders(
+    options: ConfigurableModuleAsyncOptions<LoggerConfigOptions>
+  ): Provider[] {
+    if (options.useFactory) {
+      return [
+        {
+          provide: LOGGER_OPTIONS,
+          useFactory: options.useFactory,
+          inject: options.inject || [],
+        },
+      ];
+    }
+
+    const useClass: Type<LoggerConfigFactory> =
+      options.useClass as unknown as Type<LoggerConfigFactory>;
+
+    return [
+      {
+        provide: useClass,
+        useClass,
+      },
+      {
+        provide: LOGGER_OPTIONS,
+        useFactory: async (
+          optionsFactory: LoggerConfigFactory
+        ): Promise<LoggerConfigOptions> =>
+          await optionsFactory.createLoggerOptions(),
+        inject: [useClass],
+      },
+    ];
   }
 }
