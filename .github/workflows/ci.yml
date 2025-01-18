@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run commitlint
+        run: yarn commitlint --from=origin/main --to=HEAD
+
+      - name: Run lint
+        run: yarn lint:check
+
+      - name: Run style
+        run: yarn style:check
+
+      - name: Run unit tests
+        run: yarn test:unit
