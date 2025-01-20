@@ -2,18 +2,29 @@
 import { pino } from 'pino';
 
 import { LoggerConfigOptions } from '../../src/interfaces';
-import { PinoLoggerFactory } from '../../src/pino';
+import { PINO_LOGGER_OPTIONS_DEFAULT, PinoLoggerFactory } from '../../src/pino';
 
 describe('PinoLoggerFactory', () => {
-  describe('configurePrettyOptions', () => {
+  describe('getOptions', () => {
     it('should return pino logger options with level info and enabled', () => {
       // Arrange
       const loggerOptions: LoggerConfigOptions = {
         pino: {
           level: 'info',
           enabled: true,
+          redact: ['req.authorization', 'password'],
+          transport: {
+            target: 'pino-pretty',
+            options: {
+              levelFirst: true,
+              singleLine: true,
+              messageFormat:
+                '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
+            },
+          },
         },
       };
+      const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
 
       const expected: pino.LoggerOptions = {
         enabled: true,
@@ -31,8 +42,7 @@ describe('PinoLoggerFactory', () => {
       };
 
       // Act
-      const options: pino.LoggerOptions =
-        PinoLoggerFactory['configurePrettyOptions'](loggerOptions);
+      const options: pino.LoggerOptions = sut['getOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);
@@ -46,25 +56,41 @@ describe('PinoLoggerFactory', () => {
           enabled: false,
         },
       };
+      const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
 
       const expected: pino.LoggerOptions = {
         enabled: false,
         level: 'error',
-        redact: ['req.authorization', 'password'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
       };
 
       // Act
-      const options: pino.LoggerOptions =
-        PinoLoggerFactory['configurePrettyOptions'](loggerOptions);
+      const options: pino.LoggerOptions = sut['getOptions']();
+
+      // Assert
+      expect(options).toStrictEqual(expected);
+    });
+
+    it('should return pino logger options with default configuration when options are not provided', () => {
+      // Arrange
+      const sut: PinoLoggerFactory = new PinoLoggerFactory({});
+
+      const expected: pino.LoggerOptions = PINO_LOGGER_OPTIONS_DEFAULT;
+
+      // Act
+      const options: pino.LoggerOptions = sut['getOptions']();
+
+      // Assert
+      expect(options).toStrictEqual(expected);
+    });
+
+    it('should return pino logger options with default configuration when options are null', () => {
+      // Arrange
+      const sut: PinoLoggerFactory = new PinoLoggerFactory(null as never);
+
+      const expected: pino.LoggerOptions = PINO_LOGGER_OPTIONS_DEFAULT;
+
+      // Act
+      const options: pino.LoggerOptions = sut['getOptions']();
 
       // Assert
       expect(options).toStrictEqual(expected);

@@ -2,13 +2,57 @@ import { AsyncLocalStorage } from 'async_hooks';
 import pino from 'pino';
 
 import { AppLogger, AppLoggerFactory } from '../src/app.logger';
-import {
-  LoggerConfigOptions,
-  LoggerLocalAsyncStorage,
-} from '../src/interfaces';
-import { PinoLoggerFactory } from '../src/pino';
+import { LoggerLocalAsyncStorage } from '../src/interfaces';
+import { PINO_LOGGER_OPTIONS_DEFAULT, PinoLoggerFactory } from '../src/pino';
+
+jest.mock('pino');
 
 describe('AppLogger', () => {
+  describe('createLogger', () => {
+    it('should create a logger using the factory if provided', () => {
+      // Arrange
+      const { sut, pinoLoggerFactory, logger } = makeSut();
+
+      // Act
+      const createdLogger: pino.Logger = sut['createLogger']();
+
+      // Assert
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(pinoLoggerFactory.create).toHaveBeenCalledWith();
+      expect(createdLogger).toBe(logger);
+    });
+
+    it('should create a logger using the provided options if factory is not provided', () => {
+      // Arrange
+      const options = { level: 'debug' };
+      const sut: AppLogger = new AppLogger(undefined, undefined, {
+        pino: options,
+      });
+      const pinoSpy = jest.spyOn(pino as never, 'default');
+
+      // Act
+      sut['createLogger']();
+
+      // Assert
+      expect(pinoSpy).toHaveBeenCalledWith(options);
+
+      pinoSpy.mockRestore();
+    });
+
+    it('should create a logger using default options if neither factory nor options are provided', () => {
+      // Arrange
+      const sut = new AppLogger();
+      const pinoSpy = jest.spyOn(pino as never, 'default');
+
+      // Act
+      sut['createLogger']();
+
+      expect(pinoSpy).toHaveBeenCalledWith(PINO_LOGGER_OPTIONS_DEFAULT);
+
+      pinoSpy.mockRestore();
+    });
+  });
+
   describe('error', () => {
     it('should call pino logger with the correct level and message for error', () => {
       // Arrange
@@ -163,159 +207,6 @@ describe('AppLogger', () => {
 
       // Assert
       expect(traceSpy).toHaveBeenCalledWith({}, message);
-    });
-  });
-
-  describe('configureCustomOptions', () => {
-    it('should return pino logger options with level info and enabled', () => {
-      // Arrange
-      const optionsLogger: LoggerConfigOptions = {
-        pino: {
-          enabled: true,
-          level: 'info',
-        },
-      };
-      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
-
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'info',
-        redact: ['req.authorization'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions = sut['configureCustomOptions']();
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options with level info and not enabled', () => {
-      // Arrange
-      const optionsLogger: LoggerConfigOptions = {
-        pino: {
-          enabled: false,
-          level: 'info',
-        },
-      };
-      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
-
-      const expected: pino.LoggerOptions = {
-        enabled: false,
-        level: 'info',
-        redact: ['req.authorization'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions = sut['configureCustomOptions']();
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options with level warn and enabled', () => {
-      // Arrange
-      const optionsLogger: LoggerConfigOptions = {
-        pino: {
-          enabled: true,
-          level: 'warn',
-        },
-      };
-      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'warn',
-        redact: ['req.authorization'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions = sut['configureCustomOptions']();
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options with level error and enabled', () => {
-      // Arrange
-      const optionsLogger: LoggerConfigOptions = {
-        pino: {
-          enabled: true,
-          level: 'error',
-        },
-      };
-      const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'error',
-        redact: ['req.authorization'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions = sut['configureCustomOptions']();
-
-      // Assert
-      expect(options).toStrictEqual(expected);
-    });
-
-    it('should return pino logger options with level info and enabled when all params is undefined', () => {
-      // Arrange
-      const sut: AppLogger = new AppLogger(undefined, undefined, undefined);
-      const expected: pino.LoggerOptions = {
-        enabled: true,
-        level: 'info',
-        redact: ['req.authorization'],
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            levelFirst: true,
-            singleLine: true,
-            messageFormat:
-              '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-          },
-        },
-      };
-
-      // Act
-      const options: pino.LoggerOptions = sut['configureCustomOptions']();
-
-      // Assert
-      expect(options).toStrictEqual(expected);
     });
   });
 });

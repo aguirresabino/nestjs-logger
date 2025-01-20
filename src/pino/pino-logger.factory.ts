@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { LOGGER_OPTIONS } from '../constants';
 import { LoggerConfigOptions } from '../interfaces';
+import { PINO_LOGGER_OPTIONS_DEFAULT } from './pino-logger-options-default.const';
 
 @Injectable()
 export class PinoLoggerFactory {
@@ -12,26 +13,11 @@ export class PinoLoggerFactory {
   constructor(
     @Inject(LOGGER_OPTIONS) private readonly options: LoggerConfigOptions
   ) {
-    this.logger = pino(PinoLoggerFactory.configurePrettyOptions(this.options));
+    this.logger = pino(this.getOptions());
   }
 
-  private static configurePrettyOptions(
-    options: LoggerConfigOptions
-  ): pino.LoggerOptions {
-    return {
-      enabled: options.pino.enabled,
-      level: options.pino.level,
-      redact: ['req.authorization', 'password'],
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          levelFirst: true,
-          singleLine: true,
-          messageFormat:
-            '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-        },
-      },
-    };
+  private getOptions(): pino.LoggerOptions {
+    return this.options?.pino ? this.options.pino : PINO_LOGGER_OPTIONS_DEFAULT;
   }
 
   create(context?: string): pino.Logger {

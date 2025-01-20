@@ -1,7 +1,7 @@
 import { LoggerOptions } from 'pino';
 
 export interface LoggerConfigOptions {
-  pino: LoggerOptions;
+  pino?: LoggerOptions;
 }
 
 export interface LoggerConfigFactory {

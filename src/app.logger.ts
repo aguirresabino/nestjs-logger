@@ -6,7 +6,7 @@ import { Inject, Injectable, LoggerService, Optional } from '@nestjs/common';
 
 import { LOGGER_LOCAL_ASYNC_STORAGE } from './constants';
 import { LoggerConfigOptions, LoggerLocalAsyncStorage } from './interfaces';
-import { PinoLoggerFactory } from './pino/pino-logger.factory';
+import { PINO_LOGGER_OPTIONS_DEFAULT, PinoLoggerFactory } from './pino';
 
 /**
  * This class was copied and improved from the nestjs-pino package,
@@ -19,20 +19,6 @@ import { PinoLoggerFactory } from './pino/pino-logger.factory';
 export class AppLogger implements LoggerService {
   private readonly contextName: string = 'context';
   private readonly logger: pino.Logger;
-  private DEFAULT_LOGGER_OPTIONS: pino.LoggerOptions = {
-    enabled: true,
-    level: 'info',
-    redact: ['req.authorization'],
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        levelFirst: true,
-        singleLine: true,
-        messageFormat:
-          '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-      },
-    },
-  };
 
   constructor(
     @Optional()
@@ -48,27 +34,10 @@ export class AppLogger implements LoggerService {
     if (this.factory) {
       return this.factory.create();
     }
-    if (this.options) {
-      return pino(this.configureCustomOptions());
+    if (this.options?.pino) {
+      return pino(this.options.pino);
     }
-    return pino(this.DEFAULT_LOGGER_OPTIONS);
-  }
-
-  private configureCustomOptions(): pino.LoggerOptions {
-    return {
-      enabled: this.options?.pino.enabled ?? true,
-      level: this.options?.pino.level ?? 'info',
-      redact: ['req.authorization'],
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          levelFirst: true,
-          singleLine: true,
-          messageFormat:
-            '{hostname} {correlationKey} [{context}] - {msg} - {stackTrace}',
-        },
-      },
-    };
+    return pino(PINO_LOGGER_OPTIONS_DEFAULT);
   }
 
   error(message: unknown, ...optionalParams: unknown[]): void {
