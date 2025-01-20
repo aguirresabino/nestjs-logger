@@ -19,8 +19,8 @@ export class PinoLoggerFactory {
     options: LoggerConfigOptions
   ): pino.LoggerOptions {
     return {
-      enabled: options.enabled,
-      level: options.level,
+      enabled: options.pino.enabled,
+      level: options.pino.level,
       redact: ['req.authorization', 'password'],
       transport: {
         target: 'pino-pretty',

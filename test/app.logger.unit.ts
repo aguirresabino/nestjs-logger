@@ -170,8 +170,10 @@ describe('AppLogger', () => {
     it('should return pino logger options with level info and enabled', () => {
       // Arrange
       const optionsLogger: LoggerConfigOptions = {
-        enabled: true,
-        level: 'info',
+        pino: {
+          enabled: true,
+          level: 'info',
+        },
       };
       const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
 
@@ -200,8 +202,10 @@ describe('AppLogger', () => {
     it('should return pino logger options with level info and not enabled', () => {
       // Arrange
       const optionsLogger: LoggerConfigOptions = {
-        enabled: false,
-        level: 'info',
+        pino: {
+          enabled: false,
+          level: 'info',
+        },
       };
       const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
 
@@ -230,8 +234,10 @@ describe('AppLogger', () => {
     it('should return pino logger options with level warn and enabled', () => {
       // Arrange
       const optionsLogger: LoggerConfigOptions = {
-        enabled: true,
-        level: 'warn',
+        pino: {
+          enabled: true,
+          level: 'warn',
+        },
       };
       const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
       const expected: pino.LoggerOptions = {
@@ -259,8 +265,10 @@ describe('AppLogger', () => {
     it('should return pino logger options with level error and enabled', () => {
       // Arrange
       const optionsLogger: LoggerConfigOptions = {
-        enabled: true,
-        level: 'error',
+        pino: {
+          enabled: true,
+          level: 'error',
+        },
       };
       const sut: AppLogger = new AppLogger(undefined, undefined, optionsLogger);
       const expected: pino.LoggerOptions = {
