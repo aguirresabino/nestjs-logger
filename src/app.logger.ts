@@ -56,8 +56,8 @@ export class AppLogger implements LoggerService {
 
   private configureCustomOptions(): pino.LoggerOptions {
     return {
-      enabled: this.options?.enabled ?? true,
-      level: this.options?.level ?? 'info',
+      enabled: this.options?.pino.enabled ?? true,
+      level: this.options?.pino.level ?? 'info',
       redact: ['req.authorization'],
       transport: {
         target: 'pino-pretty',

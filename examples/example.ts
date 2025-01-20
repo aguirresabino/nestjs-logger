@@ -50,8 +50,10 @@ export class MyService {
 export class LoggerConfigService implements LoggerConfigFactory {
   create(): LoggerConfigOptions {
     return {
-      enabled: true,
-      level: 'debug',
+      pino: {
+        enabled: true,
+        level: 'debug',
+      },
     };
   }
 }

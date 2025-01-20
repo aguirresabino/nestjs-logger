@@ -37,8 +37,10 @@ import { LoggerModule } from '@aguirresabino/nestjs-logger';
 @Module({
   imports: [
     LoggerModule.forRoot({
-      enabled: true,
-      level: 'info',
+      pino: {
+        enabled: true,
+        level: 'info',
+      }
     }),
   ],
 })
@@ -55,8 +57,10 @@ import { LoggerModule } from '@aguirresabino/nestjs-logger';
   imports: [
     LoggerModule.forRootAsync({
       useFactory: () => ({
-        enabled: true,
-        level: 'info',
+        pino: {
+          enabled: true,
+          level: 'info',
+        }
       }),
     }),
   ],
@@ -73,8 +77,10 @@ import { LoggerModule, LoggerConfigFactory, LoggerConfigOptions } from '@aguirre
 class LoggerConfigService implements LoggerConfigFactory {
   createLoggerOptions(): LoggerConfigOptions {
     return {
-      enabled: true,
-      level: 'info',
+      pino: {
+        enabled: true,
+        level: 'info',
+      }
     };
   }
 }

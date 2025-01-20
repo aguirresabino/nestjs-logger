@@ -9,8 +9,10 @@ describe('PinoLoggerFactory', () => {
     it('should return pino logger options with level info and enabled', () => {
       // Arrange
       const loggerOptions: LoggerConfigOptions = {
-        level: 'info',
-        enabled: true,
+        pino: {
+          level: 'info',
+          enabled: true,
+        },
       };
 
       const expected: pino.LoggerOptions = {
@@ -39,8 +41,10 @@ describe('PinoLoggerFactory', () => {
     it('should return pino logger options with level error and not enabled', () => {
       // Arrange
       const loggerOptions: LoggerConfigOptions = {
-        level: 'error',
-        enabled: false,
+        pino: {
+          level: 'error',
+          enabled: false,
+        },
       };
 
       const expected: pino.LoggerOptions = {
@@ -71,8 +75,10 @@ describe('PinoLoggerFactory', () => {
     it('should create a new pino logger with default configuration when context is not provided', () => {
       // Arrange
       const loggerOptions: LoggerConfigOptions = {
-        level: 'info',
-        enabled: true,
+        pino: {
+          level: 'info',
+          enabled: true,
+        },
       };
 
       const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
@@ -90,8 +96,10 @@ describe('PinoLoggerFactory', () => {
       const context = 'TestContext';
 
       const loggerOptions: LoggerConfigOptions = {
-        level: 'error',
-        enabled: true,
+        pino: {
+          level: 'error',
+          enabled: true,
+        },
       };
       const sut: PinoLoggerFactory = new PinoLoggerFactory(loggerOptions);
 

@@ -1,6 +1,7 @@
+import { LoggerOptions } from 'pino';
+
 export interface LoggerConfigOptions {
-  enabled: boolean;
-  level: string;
+  pino: LoggerOptions;
 }
 
 export interface LoggerConfigFactory {
