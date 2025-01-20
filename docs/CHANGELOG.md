@@ -1,4 +1,4 @@
-# [2.0.0](https://github.com/aguirresabino/nestjs-logger/compare/v1.1.1...v2.0.0) (2025-01-20)
+# [2.0.1](https://github.com/aguirresabino/nestjs-logger/compare/v1.1.0...v2.0.1) (2025-01-20)
 
 
 * chore!: update nestjs monorepo to v11 ([ef6839f](https://github.com/aguirresabino/nestjs-logger/commit/ef6839f2a455389f5207b2383391df3fa34cdaa0))
@@ -6,7 +6,7 @@
 
 ### BREAKING CHANGES
 
-*
+* update nestjs monorepo to v11 ([ef6839f](https://github.com/aguirresabino/nestjs-logger/commit/ef6839f2a455389f5207b2383391df3fa34cdaa0))
 
 # [1.1.0](https://github.com/aguirresabino/nestjs-logger/compare/v1.0.0...v1.1.0) (2025-01-18)
 
