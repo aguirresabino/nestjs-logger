@@ -75,5 +75,6 @@ async function bootstrap(): Promise<void> {
   app.useLogger(app.get(getTokenOfLoggerThatOverrideNestLogger()));
   const myService: MyService = app.get(MyService);
   myService.logMessage();
+  await app.close();
 }
 void bootstrap();
