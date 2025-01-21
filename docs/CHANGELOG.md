@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/aguirresabino/nestjs-logger/compare/v2.0.1...v3.0.0) (2025-01-21)
+
+
+* feat!: update LoggerConfigOptions interface ([ee3844e](https://github.com/aguirresabino/nestjs-logger/commit/ee3844ec0e130e66abc6cacae801a5db634b8066))
+
+
+### BREAKING CHANGES
+
+* modifies the interface to accept the
+pino configuration when loading the LoggerModule using
+forRoot or forRootAsync
+
 # [2.0.1](https://github.com/aguirresabino/nestjs-logger/compare/v1.1.0...v2.0.1) (2025-01-20)
 
 
