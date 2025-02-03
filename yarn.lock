@@ -838,9 +838,9 @@
   integrity sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==
 
 "@nestjs/common@^11.0.1":
-  version "11.0.3"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.0.3.tgz#0deb7aec8087f088b78cc1ef102b81a4ad097a33"
-  integrity sha512-fTkJWQ20+jvPKfrv3A+T3wsPwwYSJyoJ+pcBzyKtv5fCpK/yX/rJalFUIpw1CDmarfqIaMX9SdkplNyxtvH6RA==
+  version "11.0.7"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.0.7.tgz#a109ab6a60b70d106eee9987da7bf39e91096362"
+  integrity sha512-2HXwaFem0IUCMoruOIC57wSxuRBBRJQwfcuHw6dsL15bqekpgmR8I53zT4RGfX7bgRDr8tINvzRun8PFeSiVgA==
   dependencies:
     uid "2.0.2"
     iterare "1.2.1"
