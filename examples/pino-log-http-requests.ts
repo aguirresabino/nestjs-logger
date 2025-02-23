@@ -49,6 +49,9 @@ async function bootstrap(): Promise<void> {
   const logger = app.get<Logger>(DEFAULT_APP_LOGGER);
   const serverPort = 3000;
   await app.listen(serverPort);
-  logger.log('Application is running on: http://localhost:3000/hello');
+  logger.log(
+    'Application is running on: http://localhost:3000/hello',
+    'bootstrap'
+  );
 }
 void bootstrap();
