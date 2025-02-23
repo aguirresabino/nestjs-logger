@@ -5,4 +5,5 @@ export interface Logger {
   info<T extends object>(data: T, message?: string): void;
   debug<T extends object>(data: T, message?: string): void;
   trace<T extends object>(data: T, message?: string): void;
+  getCorrelationKey(): string;
 }

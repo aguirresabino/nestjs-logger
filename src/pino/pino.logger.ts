@@ -9,6 +9,12 @@ export class PinoLogger implements Logger {
     private readonly asyncStorage: AsyncLocalStorage<LoggerLocalAsyncStorage>
   ) {}
 
+  getCorrelationKey(): string {
+    const correlationKey: LoggerLocalAsyncStorage | object =
+      this.asyncStorage.getStore() ?? {};
+    return (correlationKey as LoggerLocalAsyncStorage).correlationKey || '';
+  }
+
   fatal<T extends object>(data: T, message?: string): void {
     this.call<T>('fatal', data, message);
   }

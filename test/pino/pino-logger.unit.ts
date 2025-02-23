@@ -5,6 +5,45 @@ import { LoggerLocalAsyncStorage } from '../../src/interfaces';
 import { PinoLogger } from '../../src/pino';
 
 describe('PinoLogger', () => {
+  describe('getCorrelationKey', () => {
+    it('should return the correlationKey if set in asyncStorage', () => {
+      // Arrange
+      const { asyncStorage, sut } = makeSut();
+      const correlationKey = 'test-key';
+      asyncStorage.getStore.mockReturnValue({ correlationKey });
+
+      // Act
+      const result = sut.getCorrelationKey();
+
+      // Assert
+      expect(result).toBe(correlationKey);
+    });
+
+    it('should return empty string when asyncStorage returns an empty object', () => {
+      // Arrange
+      const { asyncStorage, sut } = makeSut();
+      asyncStorage.getStore.mockReturnValue({} as never);
+
+      // Act
+      const result = sut.getCorrelationKey();
+
+      // Assert
+      expect(result).toBe('');
+    });
+
+    it('should return empty string when asyncStorage.getStore returns undefined', () => {
+      // Arrange
+      const { asyncStorage, sut } = makeSut();
+      asyncStorage.getStore.mockReturnValue(undefined);
+
+      // Act
+      const result = sut.getCorrelationKey();
+
+      // Assert
+      expect(result).toBe('');
+    });
+  });
+
   describe('fatal', () => {
     it('should call logger.fatal with correlationKey, context, optionalParams and message when data is an object but not Array', () => {
       expect.hasAssertions();
