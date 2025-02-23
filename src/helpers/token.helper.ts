@@ -10,3 +10,10 @@ export function getLoggerToken(context: string): string {
   if (suffix === LOGGER_SUFFIX) return context;
   return `${context}${LOGGER_SUFFIX}`;
 }
+
+export function getContextFromLoggerToken(token: string): string {
+  const regex = /(.+)Logger(?!.*Logger)/;
+  const match: string[] | null = token.match(regex);
+
+  return match ? match[1] : token;
+}
