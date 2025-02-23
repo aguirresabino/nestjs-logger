@@ -143,6 +143,22 @@ logger.log('This is a log message');
 logger.log('This is a log message with context', 'Context');
 ```
 
+### Correlation Key
+
+The library automatically manages a `correlationKey` for tracking log entries across requests:
+
+- In HTTP requests, the correlation key is extracted from the `x-request-id` header in the [HttpLoggerMiddleware](./src/http-logger.middleware.ts). If the header is missing, the middleware assigns a new unique value.
+
+- In addition, the [LoggerLocalAsyncStorageInterceptor](./src/logger-local-async-storage.interceptor.ts) checks the current asynchronous storage context. If no `correlationKey` is present, it generates one. This ensures that a correlation identifier is always available for logs.
+
+By default, the library generates the `correlationKey` if none is provided. However, if you wish to supply your own, simply include the `correlationKey` property in your log data. For example:
+
+```ts
+this.logger.info({ foo: 'bar', correlationKey: '1234' }, 'Hello, World!');
+```
+
+For a complete example using these features, see our [pino-http-microservice.ts](./examples/pino-http-microservice.ts) example.
+
 ### Hybrid Applications (HTTP and Microservice)
 
 Hybrid applications allow you to combine an HTTP-based NestJS application with microservices in a single application. In such scenarios, it is crucial to enable the `inheritAppConfig` option during the microservice connection. This option ensures that global configuration (such as pipes, interceptors, guards, and filters) from the main HTTP application is shared with the microservice context.
