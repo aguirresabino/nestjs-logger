@@ -72,9 +72,9 @@ export class AppModule {}
 
 ```ts
 import { Module } from '@nestjs/common';
-import { LoggerModule, LoggerConfigFactory, LoggerModuleOptions } from '@aguirresabino/nestjs-logger';
+import { LoggerModule, LoggerModuleOptionsFactory, LoggerModuleOptions } from '@aguirresabino/nestjs-logger';
 
-class LoggerConfigService implements LoggerConfigFactory {
+class LoggerConfigService implements LoggerModuleOptionsFactory {
   createLoggerOptions(): LoggerModuleOptions {
     return {
       pino: {
