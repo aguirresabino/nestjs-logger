@@ -3,7 +3,7 @@ import { NestApplication, NestFactory } from '@nestjs/core';
 
 import {
   AppLoggerFactory,
-  getTokenOfLoggerThatOverrideNestLogger,
+  getDefaultLoggerToken,
   InjectLogger,
   Logger,
   LoggerConfigFactory,
@@ -74,7 +74,7 @@ async function bootstrap(): Promise<void> {
     AppModule,
     { abortOnError: false, logger: AppLoggerFactory.get() }
   );
-  app.useLogger(app.get(getTokenOfLoggerThatOverrideNestLogger()));
+  app.useLogger(app.get(getDefaultLoggerToken()));
   const myService: MyService = app.get(MyService);
   myService.logMessage();
   await app.close();

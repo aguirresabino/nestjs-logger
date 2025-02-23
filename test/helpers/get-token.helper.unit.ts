@@ -1,13 +1,10 @@
 import { DEFAULT_APP_LOGGER, LOGGER_SUFFIX } from '../../src/constants';
-import {
-  getLoggerToken,
-  getTokenOfLoggerThatOverrideNestLogger,
-} from '../../src/helpers';
+import { getDefaultLoggerToken, getLoggerToken } from '../../src/helpers';
 
-describe('getTokenOfLoggerThatOverrideNestLogger', () => {
+describe('getDefaultLoggerToken', () => {
   it('should return the token that overrides the NestJS default logger', () => {
     // Act
-    const result = getTokenOfLoggerThatOverrideNestLogger();
+    const result = getDefaultLoggerToken();
 
     // Assert
     expect(result).toStrictEqual(DEFAULT_APP_LOGGER);
