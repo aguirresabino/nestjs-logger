@@ -79,6 +79,7 @@
     "example:pino-log-to-file": "rimraf dist && tsc -p tsconfig.json && node dist/examples/pino-log-to-file.js",
     "example:pino-log-http-requests": "rimraf dist && tsc -p tsconfig.json && node dist/examples/pino-log-http-requests.js",
     "example:pino-microservice": "rimraf dist && tsc -p tsconfig.json && node dist/examples/pino-microservice.js",
+    "example:pino-http-microservice": "rimraf dist && tsc -p tsconfig.json && node dist/examples/pino-http-microservice.js",
     "release": "CI=true GIT_AUTHOR_NAME='Aguirre Sabino' GIT_COMMITTER_NAME='Aguirre Sabino' GIT_AUTHOR_EMAIL='aguirresabino187@gmail.com' GIT_COMMITTER_EMAIL='aguirresabino187@gmail.com' semantic-release",
     "test:unit": "jest --ci --passWithNoTests --config=jest.config.unit.js",
     "test:integration": "jest --runInBand --ci --passWithNoTests --config=jest.config.integration.js",
