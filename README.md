@@ -102,7 +102,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import {
   AppLoggerFactory,
-  getDefaultLoggerToken
+  DEFAULT_APP_LOGGER
 } from '@aguirresabino/nestjs-logger';
 import { AppModule } from './app.module';
 
@@ -111,7 +111,7 @@ async function bootstrap() {
     abortOnError: false,
     logger: AppLoggerFactory.get(),
   });
-  app.useLogger(app.get(getDefaultLoggerToken()));
+  app.useLogger(app.get(DEFAULT_APP_LOGGER));
 }
 void bootstrap();
 ```

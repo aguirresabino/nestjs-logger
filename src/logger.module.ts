@@ -14,7 +14,7 @@ import {
   DEFAULT_APP_LOGGER,
   LOGGER_LOCAL_ASYNC_STORAGE,
   LOGGER_OPTIONS,
-} from './constants';
+} from './helpers';
 import {
   Logger,
   LoggerConfigFactory,
