@@ -143,6 +143,27 @@ logger.log('This is a log message');
 logger.log('This is a log message with context', 'Context');
 ```
 
+### Hybrid Applications (HTTP and Microservice)
+
+Hybrid applications allow you to combine an HTTP-based NestJS application with microservices in a single application. In such scenarios, it is crucial to enable the `inheritAppConfig` option during the microservice connection. This option ensures that global configuration (such as pipes, interceptors, guards, and filters) from the main HTTP application is shared with the microservice context.
+
+This is especially important when using global interceptors like the [`LoggerLocalAsyncStorageInterceptor`](./src/logger-local-async-storage.interceptor.ts). This interceptor utilizes Node.js's `AsyncLocalStorage` to create a local context (for example, assigning a unique correlation key to each request) that is essential for tracking and logging request-specific data.
+
+For example:
+
+```ts
+import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+
+const microservice = app.connectMicroservice<MicroserviceOptions>(
+  {
+    transport: Transport.TCP,
+  },
+  { inheritAppConfig: true },
+);
+```
+
+For a complete hybrid application example using this approach, see our [pino-http-microservice.ts](./examples/pino-http-microservice.ts) example.
+
 ## Contributing
 
 Contributions are welcome! Please read our Contributing Guide to learn how you can help.
