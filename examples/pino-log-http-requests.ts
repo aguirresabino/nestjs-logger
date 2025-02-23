@@ -11,6 +11,8 @@ import {
 
 @Controller()
 export class AppController {
+  // curl -X GET http://localhost:3000/hello
+  // curl -X GET http://localhost:3000/hello -H "x-request-id: 123"
   @Get('hello')
   getHello(): Record<string, string> {
     return { message: 'Hello World' };
