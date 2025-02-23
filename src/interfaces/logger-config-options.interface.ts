@@ -1,9 +1,9 @@
 import { LoggerOptions } from 'pino';
 
-export interface LoggerConfigOptions {
+export interface LoggerModuleOptions {
   pino?: LoggerOptions;
 }
 
 export interface LoggerConfigFactory {
-  create(): LoggerConfigOptions | Promise<LoggerConfigOptions>;
+  create(): LoggerModuleOptions | Promise<LoggerModuleOptions>;
 }

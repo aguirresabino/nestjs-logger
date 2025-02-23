@@ -7,8 +7,8 @@ import {
   InjectLogger,
   Logger,
   LoggerConfigFactory,
-  LoggerConfigOptions,
   LoggerModule,
+  LoggerModuleOptions,
 } from '../src';
 
 @Injectable()
@@ -48,7 +48,7 @@ export class MyService {
 
 @Injectable()
 export class LoggerConfigService implements LoggerConfigFactory {
-  create(): LoggerConfigOptions {
+  create(): LoggerModuleOptions {
     return {
       pino: {
         enabled: true,

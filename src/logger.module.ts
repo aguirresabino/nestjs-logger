@@ -18,8 +18,8 @@ import {
 import {
   Logger,
   LoggerConfigFactory,
-  LoggerConfigOptions,
   LoggerLocalAsyncStorage,
+  LoggerModuleOptions,
 } from './interfaces';
 import { LoggerLocalAsyncStorageInterceptor } from './logger-local-async-storage.interceptor';
 import { loggerTokens } from './logger.provider';
@@ -28,7 +28,7 @@ import { createDecoratedPinoLoggerProviders, PinoLoggerFactory } from './pino';
 @Module({})
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class LoggerModule {
-  static forRoot(options: LoggerConfigOptions): DynamicModule {
+  static forRoot(options: LoggerModuleOptions): DynamicModule {
     const decoratedPinoLoggerProviders: Provider<Logger>[] =
       createDecoratedPinoLoggerProviders(loggerTokens);
 
@@ -60,7 +60,7 @@ export class LoggerModule {
   }
 
   static forRootAsync(
-    options: ConfigurableModuleAsyncOptions<LoggerConfigOptions>
+    options: ConfigurableModuleAsyncOptions<LoggerModuleOptions>
   ): DynamicModule {
     const decoratedPinoLoggerProviders: Provider<Logger>[] =
       createDecoratedPinoLoggerProviders(loggerTokens);
@@ -93,7 +93,7 @@ export class LoggerModule {
   }
 
   private static createAsyncProviders(
-    options: ConfigurableModuleAsyncOptions<LoggerConfigOptions>
+    options: ConfigurableModuleAsyncOptions<LoggerModuleOptions>
   ): Provider[] {
     if (options.useFactory) {
       return [
@@ -117,7 +117,7 @@ export class LoggerModule {
         provide: LOGGER_OPTIONS,
         useFactory: async (
           optionsFactory: LoggerConfigFactory
-        ): Promise<LoggerConfigOptions> => await optionsFactory.create(),
+        ): Promise<LoggerModuleOptions> => await optionsFactory.create(),
         inject: [useClass],
       },
     ];

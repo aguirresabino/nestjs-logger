@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { pino } from 'pino';
 
-import { LoggerConfigOptions } from '../../src/interfaces';
+import { LoggerModuleOptions } from '../../src/interfaces';
 import { PINO_LOGGER_OPTIONS_DEFAULT, PinoLoggerFactory } from '../../src/pino';
 
 describe('PinoLoggerFactory', () => {
   describe('getOptions', () => {
     it('should return pino logger options with level info and enabled', () => {
       // Arrange
-      const loggerOptions: LoggerConfigOptions = {
+      const loggerOptions: LoggerModuleOptions = {
         pino: {
           level: 'info',
           enabled: true,
@@ -50,7 +50,7 @@ describe('PinoLoggerFactory', () => {
 
     it('should return pino logger options with level error and not enabled', () => {
       // Arrange
-      const loggerOptions: LoggerConfigOptions = {
+      const loggerOptions: LoggerModuleOptions = {
         pino: {
           level: 'error',
           enabled: false,
@@ -100,7 +100,7 @@ describe('PinoLoggerFactory', () => {
   describe('create', () => {
     it('should create a new pino logger with default configuration when context is not provided', () => {
       // Arrange
-      const loggerOptions: LoggerConfigOptions = {
+      const loggerOptions: LoggerModuleOptions = {
         pino: {
           level: 'info',
           enabled: true,
@@ -121,7 +121,7 @@ describe('PinoLoggerFactory', () => {
       // Arrange
       const context = 'TestContext';
 
-      const loggerOptions: LoggerConfigOptions = {
+      const loggerOptions: LoggerModuleOptions = {
         pino: {
           level: 'error',
           enabled: true,

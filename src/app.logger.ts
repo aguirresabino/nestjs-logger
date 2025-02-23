@@ -5,7 +5,7 @@ import { Level, pino } from 'pino';
 import { Inject, Injectable, LoggerService, Optional } from '@nestjs/common';
 
 import { LOGGER_LOCAL_ASYNC_STORAGE } from './helpers';
-import { LoggerConfigOptions, LoggerLocalAsyncStorage } from './interfaces';
+import { LoggerLocalAsyncStorage, LoggerModuleOptions } from './interfaces';
 import { PINO_LOGGER_OPTIONS_DEFAULT, PinoLoggerFactory } from './pino';
 
 /**
@@ -25,7 +25,7 @@ export class AppLogger implements LoggerService {
     @Inject(LOGGER_LOCAL_ASYNC_STORAGE)
     private readonly asyncStorage?: AsyncLocalStorage<LoggerLocalAsyncStorage>,
     @Optional() private readonly factory?: PinoLoggerFactory,
-    @Optional() private readonly options?: LoggerConfigOptions
+    @Optional() private readonly options?: LoggerModuleOptions
   ) {
     this.logger = this.createLogger();
   }

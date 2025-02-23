@@ -72,10 +72,10 @@ export class AppModule {}
 
 ```ts
 import { Module } from '@nestjs/common';
-import { LoggerModule, LoggerConfigFactory, LoggerConfigOptions } from '@aguirresabino/nestjs-logger';
+import { LoggerModule, LoggerConfigFactory, LoggerModuleOptions } from '@aguirresabino/nestjs-logger';
 
 class LoggerConfigService implements LoggerConfigFactory {
-  createLoggerOptions(): LoggerConfigOptions {
+  createLoggerOptions(): LoggerModuleOptions {
     return {
       pino: {
         enabled: true,
