@@ -1,1 +1,1 @@
-export * from './get-token.helper';
+export * from './token.helper';
