@@ -4,6 +4,6 @@ export interface LoggerModuleOptions {
   pino?: LoggerOptions;
 }
 
-export interface LoggerConfigFactory {
+export interface LoggerModuleOptionsFactory {
   create(): LoggerModuleOptions | Promise<LoggerModuleOptions>;
 }

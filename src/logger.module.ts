@@ -17,9 +17,9 @@ import {
 } from './helpers';
 import {
   Logger,
-  LoggerConfigFactory,
   LoggerLocalAsyncStorage,
   LoggerModuleOptions,
+  LoggerModuleOptionsFactory,
 } from './interfaces';
 import { LoggerLocalAsyncStorageInterceptor } from './logger-local-async-storage.interceptor';
 import { loggerTokens } from './logger.provider';
@@ -105,8 +105,8 @@ export class LoggerModule {
       ];
     }
 
-    const useClass: Type<LoggerConfigFactory> =
-      options.useClass as unknown as Type<LoggerConfigFactory>;
+    const useClass: Type<LoggerModuleOptionsFactory> =
+      options.useClass as unknown as Type<LoggerModuleOptionsFactory>;
 
     return [
       {
@@ -116,7 +116,7 @@ export class LoggerModule {
       {
         provide: LOGGER_OPTIONS,
         useFactory: async (
-          optionsFactory: LoggerConfigFactory
+          optionsFactory: LoggerModuleOptionsFactory
         ): Promise<LoggerModuleOptions> => await optionsFactory.create(),
         inject: [useClass],
       },
