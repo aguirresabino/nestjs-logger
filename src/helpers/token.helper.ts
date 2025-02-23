@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import { DEFAULT_APP_LOGGER, LOGGER_SUFFIX } from '../constants';
+import { LOGGER_SUFFIX } from '../constants';
 
-export function getDefaultLoggerToken(): symbol {
-  return DEFAULT_APP_LOGGER;
-}
+export const LOGGER_OPTIONS = Symbol('LoggerOptions');
+export const LOGGER_LOCAL_ASYNC_STORAGE = Symbol('LoggerLocalAsyncStorage');
+export const DEFAULT_APP_LOGGER = Symbol('DefaultAppLogger');
 
 export function getLoggerToken(context: string): string {
   const suffix: string = context.slice(-1 * LOGGER_SUFFIX.length);

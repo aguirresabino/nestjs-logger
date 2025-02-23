@@ -3,8 +3,10 @@ import pino from 'pino';
 
 import { Provider } from '@nestjs/common';
 
-import { LOGGER_LOCAL_ASYNC_STORAGE } from '../constants';
-import { getContextFromLoggerToken } from '../helpers';
+import {
+  getContextFromLoggerToken,
+  LOGGER_LOCAL_ASYNC_STORAGE,
+} from '../helpers';
 import { Logger, LoggerLocalAsyncStorage } from '../interfaces';
 import { PinoLoggerFactory } from './pino-logger.factory';
 import { PinoLogger } from './pino.logger';

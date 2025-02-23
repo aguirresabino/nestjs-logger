@@ -2,7 +2,7 @@ import pino from 'pino';
 
 import { Inject, Injectable } from '@nestjs/common';
 
-import { LOGGER_OPTIONS } from '../constants';
+import { LOGGER_OPTIONS } from '../helpers';
 import { LoggerConfigOptions } from '../interfaces';
 import { PINO_LOGGER_OPTIONS_DEFAULT } from './pino-logger-options-default.const';
 
