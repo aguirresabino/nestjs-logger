@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/aguirresabino/nestjs-logger/compare/v3.0.0...v4.0.0) (2025-02-23)
+
+
+* refactor!: remove getDefaultLoggerToken ([5ab56f6](https://github.com/aguirresabino/nestjs-logger/commit/5ab56f63679377f08789cbeff5c0baa99a4afc07))
+* refactor!: rename LoggerConfigFactory to LoggerModuleOptionsFactory across the codebase ([66d744e](https://github.com/aguirresabino/nestjs-logger/commit/66d744e6a6f87576ee633a97fc739f6f04c40e7f))
+* refactor!: rename LoggerConfigOptions to LoggerModuleOptions across the codebase ([ef8be67](https://github.com/aguirresabino/nestjs-logger/commit/ef8be672b73463f689213601bf6e3e354da7cc71))
+
+
+### BREAKING CHANGES
+
+* rename LoggerConfigFactory to LoggerModuleOptionsFactory
+* rename LoggerConfigOptions to LoggerModuleOptions
+* remove getDefaultLoggerToken
+
 # [3.0.0](https://github.com/aguirresabino/nestjs-logger/compare/v2.0.1...v3.0.0) (2025-01-21)
 
 
