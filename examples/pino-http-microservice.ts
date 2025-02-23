@@ -41,6 +41,17 @@ export class MicroserviceController {
     this.logger.debug({ data }, 'Microservice received ping command');
     return 'pong';
   }
+
+  @MessagePattern({ cmd: 'ping-share-correlation-key' })
+  customPing(data: any): string {
+    // If correlationKey is provided in the payload, use it
+    const correlationKey: string = data.correlationKey;
+    this.logger.debug(
+      { data, correlationKey },
+      'Microservice received custom ping command'
+    );
+    return `pong with correlationKey: ${correlationKey}`;
+  }
 }
 
 //
@@ -69,6 +80,35 @@ export class HybridHttpController {
       return { status: 'success', response };
     } catch (err: any) {
       this.logger.error({}, `Error sending message: ${err.message || err}`);
+      return { status: 'error', message: err.message || err };
+    }
+  }
+
+  // curl -X POST http://localhost:3000/share-correlation-key -H "Content-Type: application/json" -d '{"example": "data"}'
+  // curl -X POST http://localhost:3000/share-correlation-key -H "Content-Type: application/json" -H "x-request-id: 123" -d '{"example": "data"}'
+  @Post('share-correlation-key')
+  async shareCorrelationKey(
+    @Body() payload: Record<string, any>
+  ): Promise<Record<string, any>> {
+    this.logger.debug(
+      { payload },
+      'HTTP share-correlation-key endpoint called'
+    );
+    await this.client.connect();
+    try {
+      const correlationKey: string = this.logger.getCorrelationKey();
+      const response = await lastValueFrom(
+        this.client.send(
+          { cmd: 'ping-share-correlation-key' },
+          { ...payload, correlationKey }
+        )
+      );
+      return { status: 'success', response };
+    } catch (err: any) {
+      this.logger.error(
+        {},
+        `Error sending custom message: ${err.message || err}`
+      );
       return { status: 'error', message: err.message || err };
     }
   }
