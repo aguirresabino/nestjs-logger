@@ -2,6 +2,7 @@ import { LoggerOptions } from 'pino';
 
 export interface LoggerModuleOptions {
   pino?: LoggerOptions;
+  enableHttpLogging?: boolean;
 }
 
 export interface LoggerModuleOptionsFactory {

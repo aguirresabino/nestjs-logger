@@ -3,7 +3,10 @@ import { AsyncLocalStorage } from 'async_hooks';
 import {
   ConfigurableModuleAsyncOptions,
   DynamicModule,
+  Inject,
+  MiddlewareConsumer,
   Module,
+  NestModule,
   Provider,
   Type,
 } from '@nestjs/common';
@@ -15,6 +18,7 @@ import {
   LOGGER_LOCAL_ASYNC_STORAGE,
   LOGGER_OPTIONS,
 } from './helpers';
+import { HttpLoggerMiddleware } from './http-logger.middleware';
 import {
   Logger,
   LoggerLocalAsyncStorage,
@@ -26,8 +30,12 @@ import { loggerTokens } from './logger.provider';
 import { createDecoratedPinoLoggerProviders, PinoLoggerFactory } from './pino';
 
 @Module({})
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class LoggerModule {
+export class LoggerModule implements NestModule {
+  constructor(
+    @Inject(LOGGER_OPTIONS)
+    private readonly options: LoggerModuleOptions
+  ) {}
+
   static forRoot(options: LoggerModuleOptions): DynamicModule {
     const decoratedPinoLoggerProviders: Provider<Logger>[] =
       createDecoratedPinoLoggerProviders(loggerTokens);
@@ -121,5 +129,11 @@ export class LoggerModule {
         inject: [useClass],
       },
     ];
+  }
+
+  configure(consumer: MiddlewareConsumer): void {
+    if (this.options.enableHttpLogging) {
+      consumer.apply(HttpLoggerMiddleware).forRoutes('*');
+    }
   }
 }
