@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { DEFAULT_APP_LOGGER, LOGGER_SUFFIX } from '../constants';
 
-export function getTokenOfLoggerThatOverrideNestLogger(): symbol {
+export function getDefaultLoggerToken(): symbol {
   return DEFAULT_APP_LOGGER;
 }
 
