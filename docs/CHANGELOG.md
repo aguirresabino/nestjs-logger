@@ -1,3 +1,13 @@
+# [4.1.0](https://github.com/aguirresabino/nestjs-logger/compare/v4.0.0...v4.1.0) (2025-02-23)
+
+
+### Features
+
+* add enableHttpLogging option and implement HttpLoggerMiddleware ([d515d93](https://github.com/aguirresabino/nestjs-logger/commit/d515d9353e4854f84ce5966b1c38167f5b14a2bc))
+* add example microservice using Pino logger and NestJS microservices ([d192def](https://github.com/aguirresabino/nestjs-logger/commit/d192def4e9ffcfceb70214d74fc62dabbc7d7707))
+* add getCorrelationKey method to PinoLogger for retrieving correlation key from asyncStorage ([c72e2f0](https://github.com/aguirresabino/nestjs-logger/commit/c72e2f0fc65a19fe280028342d98e982d3a16b7a))
+* implement hybrid microservice with HTTP and TCP transport using NestJS ([4b795eb](https://github.com/aguirresabino/nestjs-logger/commit/4b795eba5a8eb1ebe957994ec6fb541c497ac2fe))
+
 # [4.0.0](https://github.com/aguirresabino/nestjs-logger/compare/v3.0.0...v4.0.0) (2025-02-23)
 
 
