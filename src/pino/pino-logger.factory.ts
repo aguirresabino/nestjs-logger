@@ -3,7 +3,7 @@ import pino from 'pino';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { LOGGER_OPTIONS } from '../helpers';
-import { LoggerConfigOptions } from '../interfaces';
+import { LoggerModuleOptions } from '../interfaces';
 import { PINO_LOGGER_OPTIONS_DEFAULT } from './pino-logger-options-default.const';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class PinoLoggerFactory {
   private readonly logger: pino.Logger;
 
   constructor(
-    @Inject(LOGGER_OPTIONS) private readonly options: LoggerConfigOptions
+    @Inject(LOGGER_OPTIONS) private readonly options: LoggerModuleOptions
   ) {
     this.logger = pino(this.getOptions());
   }
