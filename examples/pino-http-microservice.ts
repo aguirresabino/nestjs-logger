@@ -55,6 +55,7 @@ export class HybridHttpController {
   ) {}
 
   // curl -X POST http://localhost:3000/publish -H "Content-Type: application/json" -d '{"example": "data"}'
+  // curl -X POST http://localhost:3000/publish -H "Content-Type: application/json" -H "x-request-id: 123" -d '{"example": "data"}'
   @Post('publish')
   async publish(
     @Body() payload: Record<string, any>
