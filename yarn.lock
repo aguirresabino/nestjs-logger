@@ -867,9 +867,9 @@
     tslib "2.8.1"
 
 "@nestjs/platform-express@^11.0.1":
-  version "11.0.10"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-11.0.10.tgz#e11204a517a10579e59ab270194e5bae8df593a1"
-  integrity sha512-UVSf0yaWFBC2Zn2FOWABXxCnyG8XNIXrNnvTFpbUFqaJu1YDdwJ7wQBBqxq9CtJT7ILqSmfhOU7HS0d/0EAxpw==
+  version "11.0.12"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-11.0.12.tgz#bbc68d01c650727894c59150463a73edb28fae1f"
+  integrity sha512-Jze6dY1q1BBAjFuPQT9CLjYFl5IxMSQQxD+xs6cV+4EIysHxgSFZMJqiTpknZTFgPneyp0zF1TtQAjxBshnwlg==
   dependencies:
     cors "2.8.5"
     express "5.0.1"
